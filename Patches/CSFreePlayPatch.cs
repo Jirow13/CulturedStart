@@ -11,7 +11,6 @@ using TaleWorlds.CampaignSystem.GameState;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
-using HarmonyLib;
 
 namespace zCulturedStart.Patches
 {
