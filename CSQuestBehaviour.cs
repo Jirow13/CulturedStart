@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Windows.Forms;
 using StoryMode;
 using StoryMode.Behaviors.Quests.FirstPhase;
 using StoryMode.StoryModePhases;
@@ -62,19 +63,29 @@ namespace zCulturedStart
 
         private void OnQuestStarted(QuestBase quest)
         {
-            if (quest.StringId == "investigate_neretzes_banner_quest" && CSCharCreationOption.CSGameOption == 1)
-            { 
-                AccessTools.Method(typeof(QuestBase), "CompleteQuestWithSuccess").Invoke(quest, null);
-            } 
-            if (quest.StringId == "main_storyline_create_kingdom_quest_1"|| quest.StringId == "main_storyline_create_kingdom_quest_0")
+            try
             {
-                if (Clan.PlayerClan.Kingdom.RulingClan == Clan.PlayerClan){
-                    Type type = AccessTools.TypeByName("StoryMode.Behaviors.Quests.FirstPhase.CreateKingdomQuestBehavior+CreateKingdomQuest");
-                    JournalLog log = (JournalLog)AccessTools.Field(type, "_clanIndependenceRequirementLog").GetValue(quest);
-                    AccessTools.Field(type, "_hasPlayerCreatedKingdom").SetValue(quest, true);
-                    Object[] parameters = new object[] { log, 1 };
-                    AccessTools.Method(typeof(QuestBase), "UpdateQuestTaskStage").Invoke(quest, parameters);
+                if (quest.StringId == "investigate_neretzes_banner_quest" && CSCharCreationOption.CSGameOption == 1)
+                { 
+                    AccessTools.Method(typeof(QuestBase), "CompleteQuestWithSuccess").Invoke(quest, null);
+                } 
+                if (quest.StringId == "main_storyline_create_kingdom_quest_1"|| quest.StringId == "main_storyline_create_kingdom_quest_0")
+                {
+                    // Add check to resolve error when Clan.PlayerClan.Kingdom doesn't exist.
+                    // if (Clan.PlayerClan.Kingdom.RulingClan == Clan.PlayerClan)
+                    if (Clan.PlayerClan.Kingdom != null && Clan.PlayerClan.Kingdom.RulingClan == Clan.PlayerClan)
+                    {
+                        Type type = AccessTools.TypeByName("StoryMode.Behaviors.Quests.FirstPhase.CreateKingdomQuestBehavior+CreateKingdomQuest");
+                        JournalLog log = (JournalLog)AccessTools.Field(type, "_clanIndependenceRequirementLog").GetValue(quest);
+                        AccessTools.Field(type, "_hasPlayerCreatedKingdom").SetValue(quest, true);
+                        Object[] parameters = new object[] { log, 1 };
+                        AccessTools.Method(typeof(QuestBase), "UpdateQuestTaskStage").Invoke(quest, parameters);
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message + "\n" + exception.StackTrace + "\n" + exception.InnerException);
             }
         }
         private void OnQuestCompleted(QuestBase quest, QuestBase.QuestCompleteDetails detail)
