@@ -25,7 +25,7 @@ namespace zCulturedStart
         {
             //Take away all the stuff to apply to each option
             GiveGoldAction.ApplyBetweenCharacters(Hero.MainHero, null, Hero.MainHero.Gold, true);
-            PartyBase.MainParty.ItemRoster.RemoveAllItems();
+            PartyBase.MainParty.ItemRoster.Clear();
             int Option = CSCharCreationOption.CSSelectOption;
             Settlement Castle;
             switch (Option) {

@@ -1,0 +1,64 @@
+<Window>
+  <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Sprite="BlankWhiteSquare_9" Brush.Color="#000000FF">
+    <Children>
+      <TextWidget WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" Text="Test" />
+
+      <ListPanel WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Center" VerticalAlignment="Bottom" PositionYOffset="0">
+        <Children>
+
+          <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" MarginRight="20"  HorizontalAlignment="Right" VerticalAlignment="Center" Brush="Popup.Cancel.Button" Command.Click="OnPreviousStage">
+            <Children>
+              <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="@PreviousStageText" />
+            </Children>
+          </ButtonWidget>
+
+          <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="251" SuggestedHeight="64" MarginLeft="20" HorizontalAlignment="Right" VerticalAlignment="Center" Brush="Popup.Done.Button" Command.Click="OnNextStage" >
+            <Children>
+              <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Popup.Button.Text" Text="@NextStageText" />
+            </Children>
+          </ButtonWidget>
+
+        </Children>
+      </ListPanel>
+
+    
+  
+	  <Widget Id="RightPanel" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="694" SuggestedHeight="1080" HorizontalAlignment="Right" Sprite="CharacterCreation\character_creation_panel" VerticalAlinment="Center" >
+		 <Children>
+			<RichTextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="670" SuggestedHeight="55" HorizontalAlignment="Right" Brush="Stage.Title.Text" Text="@Title" />
+			
+			<Widget Id="InnerPanel" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="573" SuggestedHeight="750"  MarginTop="70" MarginLeft="50" HorizontalAlignment="Center" VerticalAlignment="Center" >
+				<Children>
+					<ScrollbarWidget Id="VerticalScrollbar" WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="8" HorizontalAlignment="Right" VerticalAlignment="Center" MarginTop="15" MarginBottom="15" AlignmentAxis="Vertical" Handle="VerticalScrollbarHandle" MaxValue="100" MinValue="0">
+					  <Children>
+						<Widget WidthSizePolicy="Fixed" HeightSizePolicy="StretchToParent" SuggestedWidth="4" HorizontalAlignment="Center" Sprite="BlankWhiteSquare_9" Brush.AlphaFactor="0.2" Brush.Color="#5a4033FF" />
+						<ImageWidget Id="VerticalScrollbarHandle" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="8" SuggestedHeight="10" HorizontalAlignment="Center" Brush="FaceGen.Scrollbar.Handle" />
+					  </Children>
+					</ScrollbarWidget>			
+				
+				</Children>
+			</Widget>	
+		 </Children>
+	  </Widget>
+	  
+	  <!--LeftPanel-->
+	  <Widget WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren" SuggestedWidth="800" HorizontalAlignment="Left" VerticalAlignment="Center" Brush="Frame1.Broken.Left">
+          <Children>
+            <ListPanel DataSource="{UnspentAttributePointsHint}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Left" VerticalAlignment="Center" MarginLeft="25" Command.HoverBegin="ExecuteBeginHint" Command.HoverEnd="ExecuteEndHint" DoNotPassEventsToChildren="true">
+                  <Children>
+                    <!--Attribute Point Image-->
+                    <Widget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="35" SuggestedHeight="35" VerticalAlignment="Center" Sprite="CharacterDeveloper\attribute_point_icon" PositionYOffset="-2"/>
+                    <!--Unspent Attribute Points Number-->
+                    <Widget DataSource="{..}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" VerticalAlignment="Center">
+                      <Children>
+                        <TextWidget DataSource="{CurrentCharacter}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" VerticalAlignment="Center" Brush="CharacterDeveloper.RightPanel.FreeFocus.Text.Prox" Brush.FontColor="#FAEBD4FF" Brush.FontSize="40" IntText="@UnspentAttributePoints" />
+                      </Children>
+                    </Widget>
+                  </Children>
+                </ListPanel>
+            
+          </Children>
+        </Widget>
+	 </Children>
+  </Widget>
+</Window>

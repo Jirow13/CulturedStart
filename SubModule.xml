@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+	<Name value="zCulturedStart"/>
+	<Id value="zCulturedStart"/>
+	<Version value="v1.1.14.3"/>
+	<DefaultModule value="false"/>
+	<SingleplayerModule value="true"/>
+	<MultiplayerModule value="false"/>
+  	<Official value="false" />
+	<DependedModules>
+		<DependedModule Id="Native"/>
+		<DependedModule Id="SandBoxCore"/>
+		<DependedModule Id="Sandbox"/>
+		<DependedModule Id="CustomBattle"/>
+		<DependedModule Id="StoryMode"/>
+	</DependedModules>
+	<SubModules>
+		<SubModule>
+			<Name value="zCulturedStart"/>
+			<DLLName value="zCulturedStart.dll"/>
+			<SubModuleClassType value="zCulturedStart.SubModule"/>
+			<Tags>
+				<Tag key="DedicatedServerType" value="none" />
+				<Tag key="IsNoRenderModeElement" value="false" />
+			</Tags>
+		</SubModule>
+	</SubModules>
+	<Xmls>	
+		<XmlNode>
+		<XmlName id="Settlements" path="culturedstory_mode_settlements"/>
+			<IncludedGameTypes>
+			<GameType value = "Campaign"/>
+			<GameType value = "CampaignStoryMode"/>
+			<GameType value = "CustomGame"/>
+			</IncludedGameTypes>
+		</XmlNode>
+	</Xmls>	
+</Module>
